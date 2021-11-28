@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">GEPrices</string>
+    <string name="backToList">Back to List</string>
+    <string name="is_favorite">Favorite?</string>
+    <string name="last_updated_at">Last updated at</string>
+    <string name="update">Update</string>
+    <string name="current">Current</string>
+    <string name="today">Today</string>
+    <string name="_90_days">90 days</string>
+    <string name="_30_days">30 days</string>
+    <string name="_180_days">180 days</string>
+    <string name="trend_icon_description">Trend icon</string>
+    <string name="coins_icon_description">Coins icon</string>
+    <string name="trend_percent_text">%1$s%%</string>
+    <string name="price">%1$s</string>
+    <string name="keyword_fill_hint">Enter keyword</string>
+    <string name="search">Search</string>
+</resources>

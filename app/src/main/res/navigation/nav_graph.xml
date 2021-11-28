@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/commodityListFragment">
+
+    <fragment
+        android:id="@+id/commodityDetailsFragment"
+        android:name="com.github.rkeeves.geprices.ui.details.CommodityDetailsFragment"
+        android:label="CommodityDetailsFragment" >
+        <argument
+            android:name="commodityId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_commodityDetailsFragment_to_commodityListFragment"
+            app:destination="@id/commodityListFragment"
+            app:popUpTo="@id/commodityListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/commodityListFragment"
+        android:name="com.github.rkeeves.geprices.ui.list.CommodityListFragment"
+        android:label="CommodityListFragment" >
+        <action
+            android:id="@+id/action_commodityListFragment_to_commodityDetailsFragment"
+            app:destination="@id/commodityDetailsFragment" />
+    </fragment>
+</navigation>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="commodity"
+            type="com.github.rkeeves.geprices.data.local.Commodity"/>
+        <variable
+            name="clickListener"
+            type="com.github.rkeeves.geprices.ui.list.CommodityClickListener" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:onClick="@{() -> clickListener.onClick(commodity)}">
+
+
+        <TextView
+            android:id="@+id/tvCommodityName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{commodity.name}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Item Name" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

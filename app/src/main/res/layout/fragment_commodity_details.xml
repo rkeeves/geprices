@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="commodityDetailsViewModel"
+            type="com.github.rkeeves.geprices.ui.details.CommodityDetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".sleepdetail.SleepDetailFragment">
+
+
+        <TextView
+            android:id="@+id/tvCommodityName"
+            android:layout_width="240dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Item name"
+            android:text="@{commodityDetailsViewModel.commodity.name}"/>
+
+        <TextView
+            android:id="@+id/tvType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@+id/tvCommodityName"
+            app:layout_constraintTop_toBottomOf="@+id/tvCommodityName"
+            tools:text="Some type"
+            android:text="@{commodityDetailsViewModel.commodity.type}"/>
+
+        <TextView
+            android:id="@+id/lblLastUpdatedAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/last_updated_at"
+            app:layout_constraintStart_toStartOf="@+id/tvType"
+            app:layout_constraintTop_toBottomOf="@+id/tvType" />
+
+        <TextView
+            android:id="@+id/tvLastUpdatedAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/lblLastUpdatedAt"
+            app:layout_constraintStart_toEndOf="@+id/lblLastUpdatedAt"
+            tools:text="2021.05.05. 20:00"
+            app:timestamp="@{commodityDetailsViewModel.commodity.lastDetailsUpdateAt}"/>
+
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:onClick="@{() -> commodityDetailsViewModel.onSync()}"
+            android:text="@string/update"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvLastUpdatedAt"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="@{commodityDetailsViewModel.commodity.description}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnUpdate"
+            tools:text="Description" />
+
+        <TextView
+            android:id="@+id/lblCurrent"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/current"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+
+        <TextView
+            android:id="@+id/tvCurrentPrice"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/lblCurrent"
+            app:layout_constraintStart_toEndOf="@+id/lblCurrent"
+            tools:text="1000"
+            app:price="@{commodityDetailsViewModel.commodity.currentPrice}"/>
+
+        <ImageView
+            android:id="@+id/ivCurrentCoins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/coins_icon_description"
+            app:layout_constraintStart_toEndOf="@+id/tvCurrentPrice"
+            app:layout_constraintTop_toTopOf="@+id/tvCurrentPrice"
+            app:srcCompat="@drawable/coins" />
+
+        <TextView
+            android:id="@+id/lblToday"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/today"
+            app:layout_constraintEnd_toEndOf="@+id/lblCurrent"
+            app:layout_constraintStart_toStartOf="@+id/lblCurrent"
+            app:layout_constraintTop_toBottomOf="@+id/lblCurrent" />
+
+        <TextView
+            android:id="@+id/tvTodayPrice"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/lblToday"
+            app:layout_constraintStart_toEndOf="@+id/lblToday"
+            tools:text="1000"
+            app:today_price="@{commodityDetailsViewModel.commodity}"/>
+
+        <ImageView
+            android:id="@+id/ivTodayCoins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/coins_icon_description"
+            app:layout_constraintStart_toStartOf="@+id/ivCurrentCoins"
+            app:layout_constraintTop_toTopOf="@+id/tvTodayPrice"
+            app:srcCompat="@drawable/coins" />
+
+        <TextView
+            android:id="@+id/tvTodayChange"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvTodayPrice"
+            app:layout_constraintStart_toEndOf="@+id/ivTodayCoins"
+            tools:text="+100%"
+            app:today_percent="@{commodityDetailsViewModel.commodity}"/>
+
+        <ImageView
+            android:id="@+id/ivTodayTrend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/trend_icon_description"
+            app:layout_constraintStart_toEndOf="@+id/tvTodayChange"
+            app:layout_constraintTop_toTopOf="@+id/tvTodayChange"
+            app:srcCompat="@drawable/no_change"
+            app:today_trend="@{commodityDetailsViewModel.commodity.todayPriceChange}"/>
+
+        <TextView
+            android:id="@+id/lbl30days"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/_30_days"
+            app:layout_constraintEnd_toEndOf="@+id/lblToday"
+            app:layout_constraintStart_toStartOf="@+id/lblToday"
+            app:layout_constraintTop_toBottomOf="@+id/lblToday" />
+
+        <TextView
+            android:id="@+id/tv30daysPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBaseline_toBaselineOf="@+id/lbl30days"
+            app:layout_constraintEnd_toEndOf="@+id/tvTodayPrice"
+            app:layout_constraintStart_toStartOf="@+id/tvTodayPrice"
+            tools:text="1000"
+            app:short_term_price="@{commodityDetailsViewModel.commodity}"/>
+
+        <ImageView
+            android:id="@+id/iv30daysCoins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/coins_icon_description"
+            app:layout_constraintStart_toStartOf="@+id/ivTodayCoins"
+            app:layout_constraintTop_toTopOf="@+id/tv30daysPrice"
+            app:srcCompat="@drawable/coins" />
+
+        <TextView
+            android:id="@+id/tv30daysChange"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv30daysPrice"
+            app:layout_constraintEnd_toEndOf="@+id/tvTodayChange"
+            app:layout_constraintStart_toStartOf="@+id/tvTodayChange"
+            tools:text="+100%"
+            app:trend_percent="@{commodityDetailsViewModel.commodity.shortTermChange}"/>
+
+        <ImageView
+            android:id="@+id/iv30daysTrend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/trend_icon_description"
+            app:layout_constraintStart_toStartOf="@+id/ivTodayTrend"
+            app:layout_constraintTop_toTopOf="@+id/tv30daysChange"
+            app:srcCompat="@drawable/no_change"
+            app:trend_image="@{commodityDetailsViewModel.commodity.shortTermChange}"/>
+
+        <TextView
+            android:id="@+id/lbl90days"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/_90_days"
+            app:layout_constraintEnd_toEndOf="@+id/lbl30days"
+            app:layout_constraintStart_toStartOf="@+id/lbl30days"
+            app:layout_constraintTop_toBottomOf="@+id/lbl30days" />
+
+        <TextView
+            android:id="@+id/tv90daysPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBaseline_toBaselineOf="@+id/lbl90days"
+            app:layout_constraintEnd_toEndOf="@+id/tv30daysPrice"
+            app:layout_constraintStart_toStartOf="@+id/tv30daysPrice"
+            tools:text="1000"
+            app:mid_term_price="@{commodityDetailsViewModel.commodity}"/>
+
+        <ImageView
+            android:id="@+id/iv90daysCoins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/coins_icon_description"
+            app:layout_constraintStart_toStartOf="@+id/iv30daysCoins"
+            app:layout_constraintTop_toTopOf="@+id/tv90daysPrice"
+            app:srcCompat="@drawable/coins" />
+
+        <TextView
+            android:id="@+id/tv90daysChange"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv90daysPrice"
+            app:layout_constraintEnd_toEndOf="@+id/tv30daysChange"
+            app:layout_constraintStart_toStartOf="@+id/tv30daysChange"
+            tools:text="+100%"
+            app:trend_percent="@{commodityDetailsViewModel.commodity.midTermChange}"/>
+
+        <ImageView
+            android:id="@+id/iv90daysTrend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/trend_icon_description"
+            app:layout_constraintStart_toStartOf="@+id/iv30daysTrend"
+            app:layout_constraintTop_toTopOf="@+id/tv90daysChange"
+            app:srcCompat="@drawable/no_change"
+            app:trend_image="@{commodityDetailsViewModel.commodity.midTermChange}"/>
+
+        <TextView
+            android:id="@+id/lbl180days"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/_180_days"
+            app:layout_constraintEnd_toEndOf="@+id/lbl90days"
+            app:layout_constraintStart_toStartOf="@+id/lbl90days"
+            app:layout_constraintTop_toBottomOf="@+id/lbl90days" />
+
+        <TextView
+            android:id="@+id/tv180daysPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBaseline_toBaselineOf="@+id/lbl180days"
+            app:layout_constraintEnd_toEndOf="@+id/tv90daysPrice"
+            app:layout_constraintStart_toStartOf="@+id/tv90daysPrice"
+            tools:text="1000"
+            app:long_term_price="@{commodityDetailsViewModel.commodity}"/>
+
+        <ImageView
+            android:id="@+id/iv180daysCoins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/coins_icon_description"
+            app:layout_constraintStart_toStartOf="@+id/iv90daysCoins"
+            app:layout_constraintTop_toTopOf="@+id/tv180daysPrice"
+            app:srcCompat="@drawable/coins" />
+
+        <TextView
+            android:id="@+id/tv180daysChange"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv180daysPrice"
+            app:layout_constraintEnd_toEndOf="@+id/tv90daysChange"
+            app:layout_constraintStart_toStartOf="@+id/tv90daysChange"
+            tools:text="+100%"
+            app:trend_percent="@{commodityDetailsViewModel.commodity.longTermChange}"/>
+
+        <ImageView
+            android:id="@+id/iv180daysTrend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/trend_icon_description"
+            app:layout_constraintStart_toStartOf="@+id/iv90daysTrend"
+            app:layout_constraintTop_toTopOf="@+id/tv180daysChange"
+            app:srcCompat="@drawable/no_change"
+            app:trend_image="@{commodityDetailsViewModel.commodity.longTermChange}"/>
+
+        <Button
+            android:id="@+id/btnBackToList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="32dp"
+            android:onClick="@{() -> commodityDetailsViewModel.onClose()}"
+            android:text="@string/backToList"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
