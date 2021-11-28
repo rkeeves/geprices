@@ -14,6 +14,10 @@ import com.github.rkeeves.geprices.data.local.CommodityDatabase
 import com.github.rkeeves.geprices.data.remote.CommodityApiInstance
 import com.github.rkeeves.geprices.databinding.FragmentCommodityListBinding
 import com.github.rkeeves.geprices.repo.DefaultCommodityRepository
+import android.app.Activity
+import android.content.Context
+import android.view.inputmethod.InputMethodManager
+
 
 class CommodityListFragment: Fragment() {
 
@@ -49,6 +53,7 @@ class CommodityListFragment: Fragment() {
         binding.btnSearch.setOnClickListener {
             val keyword = binding.etKeyword.text.toString()
             if (keyword.length > 2) {
+                dismissKeyboard(requireActivity())
                 viewModel.onSearch(keyword)
             }
         }
@@ -74,5 +79,14 @@ class CommodityListFragment: Fragment() {
         })
 
         return binding.root
+    }
+
+    fun dismissKeyboard(activity: Activity) {
+        val imm: InputMethodManager =
+            activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        if (null != activity.currentFocus) imm.hideSoftInputFromWindow(
+            activity.currentFocus!!
+                .applicationWindowToken, 0
+        )
     }
 }
